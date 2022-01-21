@@ -1,0 +1,20 @@
+@import '../less/variables';
+
+.logo-container {
+  width: fit-content;
+  margin: 50px auto 40px;
+  @media screen and (min-width: @SecondBreak) {
+    margin: 160px auto 85px;
+  }
+}
+
+app-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media screen and (min-width: @SecondBreak) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

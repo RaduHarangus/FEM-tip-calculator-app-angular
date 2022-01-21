@@ -1,0 +1,25 @@
+@import 'variables';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+.container {
+  background-color: @calculator-bg;
+  max-width: 375px;
+  margin-inline: auto;
+  border-radius: @Border-radius;
+  padding: 32px;
+  @media screen and (min-width: @SecondBreak) {
+    max-width: 921px;
+  }
+}

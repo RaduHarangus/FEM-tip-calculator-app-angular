@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from "@angular/forms";
 
 @Component({
   selector: 'app-output',
@@ -8,20 +7,9 @@ import { FormBuilder } from "@angular/forms";
 })
 export class OutputComponent implements OnInit {
 
-  outputForm = this.formBuilder.group({
-    tipAmount: '',
-    total: ''
-  });
-
-  constructor(private formBuilder: FormBuilder) { }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  onSubmit(): void {
-    // Process checkout data here
-    console.warn('Your order has been reset');
-    this.outputForm.reset();
   }
 
 }

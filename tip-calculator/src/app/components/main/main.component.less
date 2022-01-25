@@ -3,8 +3,21 @@
 app-input,
 app-output {
   width: 100%;
-  background-color: lightpink;
-  border: 1px solid red;
-  border-radius: @Border-radius;
-  padding: 1rem;
+
+}
+
+app-input {
+  padding: 9.5px;
+  @media screen and (min-width: @SecondBreak) {
+    padding: 13px;
+  }
+}
+
+app-output {
+  background-color: @display-bg;
+  border-radius: @Border-radius2;
+  padding: 22.5px;
+  @media screen and (min-width: @SecondBreak) {
+    padding: 40px;
+  }
 }

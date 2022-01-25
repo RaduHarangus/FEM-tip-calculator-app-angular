@@ -1,26 +1,32 @@
-<form [formGroup]="inputForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="inputForm" (ngSubmit)="onSubmit()" class="input-form">
   <div>
-    <label for="bill">Bill</label>
+    <div class="error-container">
+      <label for="billInput">Bill</label>
+      <div class="error-wrapper"></div>
+    </div>
+    <input class="inputField" id="billInput" type="text" formControlName="billInput" placeholder="0">
   </div>
-  <div>
-    <input id="bill" type="text" formControlName="bill" placeholder="0">
-  </div>
-  <div>
-    <label>Select Tip %</label>
-  </div>
+
   <div class="buttons-section">
-    <button class="button">5%</button>
-    <button class="button">10%</button>
-    <button class="button">15%</button>
-    <button class="button">25%</button>
-    <button class="button">50%</button>
-    <button class="button">Custom</button>
+    <div class="error-container">
+      <label>Select Tip %</label>
+      <div class="error-wrapper"></div>
+    </div>
+    <div class="buttons-wrapper">
+      <button class="button tip-btn">5%</button>
+      <button class="button tip-btn">10%</button>
+      <button class="button tip-btn">15%</button>
+      <button class="button tip-btn">25%</button>
+      <button class="button tip-btn">50%</button>
+      <input class="tip-btn custom-btn inputField" type="text" formControlName="tipInput" placeholder="Custom">
+    </div>
   </div>
+
   <div>
-    <label for="people">Number of People</label>
-    <span>error message</span>
-  </div>
-  <div>
-    <input id="people" type="text" formControlName="people" placeholder="0">
+    <div class="error-container">
+      <label for="people">Number of People</label>
+      <div class="error-wrapper">error message</div>
+    </div>
+    <input class="inputField" id="people" type="text" formControlName="people" placeholder="0">
   </div>
 </form>

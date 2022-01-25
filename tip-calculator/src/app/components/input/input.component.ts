@@ -9,8 +9,9 @@ import { FormBuilder } from "@angular/forms";
 export class InputComponent implements OnInit {
 
   inputForm = this.formBuilder.group({
-    bill: '',
-    people: ''
+    billInput: '',
+    people: '',
+    tipInput: ''
   });
 
   constructor(private formBuilder: FormBuilder) { }

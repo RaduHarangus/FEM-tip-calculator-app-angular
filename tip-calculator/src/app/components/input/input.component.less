@@ -1,1 +1,87 @@
+@import '../../../less/variables';
 
+.input-form {
+  color: @text-medium;
+  font-weight: 600;
+  line-height: 2;
+  & label {
+    display: block;
+  }
+}
+
+.inputField {
+  width: 100%;
+  border: none;
+  border-radius: @Border-radius3;
+  text-align: right;
+  background-color: @input-bg;
+  color: @text-dark;
+  &::placeholder {
+    text-align: right;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.buttons-section {
+  margin: 2rem 0;
+}
+
+.buttons-wrapper {
+  margin: 1rem 0;
+  width: 100%;
+  display: grid;
+  gap: 17px;
+  grid-template-columns: 1fr 1fr;
+  @media screen and (min-width: @SecondBreak) {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+}
+
+.tip-btn {
+  min-width: calc(145px - @border-width1 * 2);
+  @media screen and (min-width: @SecondBreak) {
+    min-width: calc(115px - @border-width1 * 2);
+  }
+  height: calc(50px - @border-width1 * 2);
+  line-height: 2;
+  font-size: 150%;
+  border: @border-width1 solid transparent;
+  border-radius: @Border-radius3;
+  background-color: @display-bg;
+  color: @text-light;
+  &:hover {
+    background-color: @primary-color;
+    color: @text-dark;
+    cursor: pointer;
+  }
+}
+
+.custom-btn {
+  background-color: @input-bg;
+  color: @text-medium;
+  font-weight: 600;
+  &::placeholder {
+    text-align: center;
+    color: @text-dark;
+  }
+  &:hover {
+    background-color: @input-bg;
+  }
+}
+
+:focus-visible {
+  outline: @primary-color solid 3px;
+}
+
+.error-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.error-wrapper {
+  color: @error-red;
+}

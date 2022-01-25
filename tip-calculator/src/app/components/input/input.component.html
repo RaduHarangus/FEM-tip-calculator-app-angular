@@ -1,11 +1,26 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Favorite food</mat-label>
-    <input matInput placeholder="Ex. Pizza" value="Sushi">
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Leave a comment</mat-label>
-    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-  </mat-form-field>
+<form [formGroup]="inputForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="bill">Bill</label>
+  </div>
+  <div>
+    <input id="bill" type="text" formControlName="bill" placeholder="0">
+  </div>
+  <div>
+    <label>Select Tip %</label>
+  </div>
+  <div class="buttons-section">
+    <button class="button">5%</button>
+    <button class="button">10%</button>
+    <button class="button">15%</button>
+    <button class="button">25%</button>
+    <button class="button">50%</button>
+    <button class="button">Custom</button>
+  </div>
+  <div>
+    <label for="people">Number of People</label>
+    <span>error message</span>
+  </div>
+  <div>
+    <input id="people" type="text" formControlName="people" placeholder="0">
+  </div>
 </form>

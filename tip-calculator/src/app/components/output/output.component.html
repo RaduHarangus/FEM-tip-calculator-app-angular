@@ -1,1 +1,11 @@
-<p>output works!</p>
+<form [formGroup]="outputForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="tipAmount">Tip Amount / person</label>
+    <input id="tipAmount" type="text" formControlName="tipAmount">
+  </div>
+  <div>
+    <label for="total">Total / person</label>
+    <input id="total" type="text" formControlName="total">
+  </div>
+  <button class="button" type="submit">Reset</button>
+</form>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from "@angular/forms";
 
 @Component({
   selector: 'app-input',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InputComponent implements OnInit {
 
-  constructor() { }
+  inputForm = this.formBuilder.group({
+    bill: '',
+    people: ''
+  });
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(): void {
+    // Process checkout data here
+    // this.items = this.cartService.clearCart();
+    console.warn('Your order has been submitted', this.inputForm.value);
+    this.inputForm.reset();
   }
 
 }

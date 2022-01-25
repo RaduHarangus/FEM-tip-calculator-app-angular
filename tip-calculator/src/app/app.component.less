@@ -8,13 +8,11 @@
   }
 }
 
-app-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.main-app {
+  display: grid;
+  grid-template-columns: 1fr;
   @media screen and (min-width: @SecondBreak) {
-    flex-direction: row;
-    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
   }
 }
+

@@ -8,12 +8,14 @@ import { BehaviorSubject } from "rxjs";
 export class InputDataService {
 
   inputForm = this.formBuilder.group({
-    billInput: '4',
-    people: '5',
-    tipInput: 6
+    billInput: 0,
+    people: 0,
+    tipInput: 0
   });
+  // tipAmount = 0;
 
   public inputSource = new BehaviorSubject(this.inputForm.value);
+  // public inputSource = new BehaviorSubject(this.tipAmount);
   currentInputData = this.inputSource.asObservable();
 
   constructor(private formBuilder: FormBuilder) { }

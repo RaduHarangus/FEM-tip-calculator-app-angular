@@ -1,10 +1,10 @@
 <div class="output-row">
   <div>Tip Amount <span class="small-text">/ person</span></div>
-  <div id="outputTip" class="outputField">{{ tipAmount }}</div>
+  <div id="outputTip" class="outputField">{{ tipAmount | number :'1.2-2' }}</div>
 </div>
 <div class="output-row">
   <div>Total <span class="small-text">/ person</span></div>
-  <div id="outputTotal" class="outputField">32.79</div>
+  <div id="outputTotal" class="outputField">{{ totalPerPerson | number :'1.2-2' }}</div>
 </div>
-<button class="button reset-btn">Reset</button>
+<button class="button reset-btn" (click)="onClickReset()">Reset</button>
 

@@ -1,5 +1,6 @@
-import {Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import { FormBuilder } from "@angular/forms";
+import { InputDataService } from '../../services/input-data.service';
 
 @Component({
   selector: 'app-input',
@@ -15,7 +16,7 @@ export class InputComponent implements OnInit {
     tipInput: 0
   });
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private inputDataService: InputDataService) { }
 
   ngOnInit(): void {
   }
@@ -29,9 +30,7 @@ export class InputComponent implements OnInit {
 
   onKeyDown(event: any): void {
     const value = event.target.value;
-    // console.log(value);
     if ( ((event.keyCode < 48 || event.keyCode > 105 ) || (event.keyCode > 57 && event.keyCode < 96)) && (value == null || value === '') ) {
-      // console.log("catch: ", event.key, event.keyCode);
       event.preventDefault();
       return;
     }
@@ -43,16 +42,9 @@ export class InputComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // Process checkout data here
-    // this.items = this.cartService.clearCart();
-
     // validateInput();
-
-    // this.tipAmountEvent.emit(Number(this.inputForm.value['billInput']) * Number(this.inputForm.value['tipInput']) /100);
-    this.tipAmountEvent.emit(this.inputForm.value);
-    // console.log('bill input: ', this.inputForm.value['billInput']);
-    // console.log('Your order has been submitted', this.inputForm.value);
+    this.tipAmountEvent.emit(this.inputForm.value['billInput']);
+    this.inputDataService.changeOutput(this.inputForm.value);
     // this.inputForm.reset();
   }
-
 }

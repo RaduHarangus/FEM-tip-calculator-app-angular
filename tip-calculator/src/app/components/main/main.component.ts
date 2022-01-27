@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+// import { InputDataService } from '../../services/input-data.service';
+// import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-main',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
+  inputData = {};
+
+  // constructor(private inputDataService: InputDataService, private subscription: Subscription) { }
   constructor() { }
 
   ngOnInit(): void {
+    // this.subscription = this.inputDataService.inputSource.subscribe(data => this.inputData = data);
+  }
+
+  updateTipAmount(value: any): void {
+    this.inputData = value;
+    // this.inputDataService.changeOutput(value);
   }
 
 }

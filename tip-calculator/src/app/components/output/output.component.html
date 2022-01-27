@@ -1,11 +1,10 @@
-
-  <div>
-    <div for="tipAmount">Tip Amount / person</div>
-    <div class="outputField">4.27</div>
-  </div>
-  <div>
-    <div for="total">Total / person</div>
-    <div class="outputField">32.79</div>
-  </div>
-  <button class="button">Reset</button>
+<div class="output-row">
+  <div>Tip Amount <span class="small-text">/ person</span></div>
+  <div id="outputTip" class="outputField">{{ tipAmount }}</div>
+</div>
+<div class="output-row">
+  <div>Total <span class="small-text">/ person</span></div>
+  <div id="outputTotal" class="outputField">32.79</div>
+</div>
+<button class="button reset-btn">Reset</button>
 

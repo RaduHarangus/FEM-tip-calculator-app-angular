@@ -13,20 +13,21 @@
       <div class="error-wrapper"></div>
     </div>
     <div class="buttons-wrapper">
-      <button class="button tip-btn">5%</button>
-      <button class="button tip-btn">10%</button>
-      <button class="button tip-btn">15%</button>
-      <button class="button tip-btn">25%</button>
-      <button class="button tip-btn">50%</button>
-      <input class="tip-btn custom-btn inputField" type="text" formControlName="tipInput" placeholder="Custom">
+      <button class="button tip-btn" (click)="onClick($event)" value="5">5%</button>
+      <button class="button tip-btn" (click)="onClick($event)" value="10">10%</button>
+      <button class="button tip-btn" (click)="onClick($event)" value="15">15%</button>
+      <button class="button tip-btn" (click)="onClick($event)" value="25">25%</button>
+      <button class="button tip-btn" (click)="onClick($event)" value="50">50%</button>
+      <input class="tip-btn custom-btn inputField" type="text" (keydown)="onKeyDown($event)" placeholder="Custom">
     </div>
   </div>
 
   <div>
     <div class="error-container">
       <label for="people">Number of People</label>
-      <div class="error-wrapper">error message</div>
+      <div class="error-wrapper">Can't be zero</div>
     </div>
     <input class="inputField" id="people" type="text" formControlName="people" placeholder="0">
   </div>
 </form>
+<p>{{ inputForm.value | json }}</p>

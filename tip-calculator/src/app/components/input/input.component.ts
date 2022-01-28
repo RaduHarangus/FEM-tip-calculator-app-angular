@@ -1,6 +1,7 @@
 import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import { FormBuilder } from "@angular/forms";
 import { InputDataService } from '../../services/input-data.service';
+import { ResetFormsService } from "../../services/reset-forms.service";
 
 @Component({
   selector: 'app-input',
@@ -16,9 +17,12 @@ export class InputComponent implements OnInit {
     tipInput: 0
   });
 
-  constructor(private formBuilder: FormBuilder, private inputDataService: InputDataService) { }
+  constructor(private formBuilder: FormBuilder,
+              private inputDataService: InputDataService,
+              private resetFormsService: ResetFormsService) { }
 
   ngOnInit(): void {
+    this.resetFormsService.resetAskedEvent.subscribe( _ => this.resetForm() );
   }
 
   onClick(event: any): void {
@@ -38,13 +42,16 @@ export class InputComponent implements OnInit {
       tipInput: Number(value)
     };
     this.inputForm.patchValue(newInput);
-    console.log('new values: ', this.inputForm.value);
   }
 
   onSubmit(): void {
     // validateInput();
     this.tipAmountEvent.emit(this.inputForm.value['billInput']);
     this.inputDataService.changeOutput(this.inputForm.value);
-    // this.inputForm.reset();
+  }
+
+  resetForm(): void {
+    this.inputForm.reset();
+
   }
 }

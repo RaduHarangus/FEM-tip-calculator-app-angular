@@ -12,10 +12,8 @@ export class InputDataService {
     people: 0,
     tipInput: 0
   });
-  // tipAmount = 0;
 
   public inputSource = new BehaviorSubject(this.inputForm.value);
-  // public inputSource = new BehaviorSubject(this.tipAmount);
   currentInputData = this.inputSource.asObservable();
 
   constructor(private formBuilder: FormBuilder) { }

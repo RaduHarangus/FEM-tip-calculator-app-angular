@@ -2,6 +2,7 @@ import {Component, Input, OnInit, OnDestroy, Output, EventEmitter} from '@angula
 import { InputDataService } from '../../services/input-data.service';
 import { FormBuilder } from "@angular/forms";
 import { Subscription } from "rxjs";
+import { ResetFormsService } from "../../services/reset-forms.service";
 
 @Component({
   selector: 'app-output',
@@ -9,7 +10,6 @@ import { Subscription } from "rxjs";
   styleUrls: ['./output.component.less']
 })
 export class OutputComponent implements OnInit {
-  @Output() clickResetEvent = new EventEmitter<number>();
   inputData = this.formBuilder.group({
     billInput: 0,
     people: 0,
@@ -20,7 +20,9 @@ export class OutputComponent implements OnInit {
   totalPerPerson = 0;
   subscription?: Subscription;
 
-  constructor(private inputDataService: InputDataService, private formBuilder: FormBuilder) { }
+  constructor(private inputDataService: InputDataService,
+              private formBuilder: FormBuilder,
+              private resetFormsService: ResetFormsService) { }
 
   ngOnInit(): void {
     this.getInputData();
@@ -31,6 +33,7 @@ export class OutputComponent implements OnInit {
       let total = Number(data['billInput']) + Number(tip);
       this.totalPerPerson = total / data['people'];
     });
+    this.resetFormsService.resetAskedEvent.subscribe( _ => this.resetForm() );
   }
 
   ngOnDestroy(): void {
@@ -44,8 +47,12 @@ export class OutputComponent implements OnInit {
   }
 
   onClickReset(): void {
-    console.log("reset asked");
-    this.clickResetEvent.emit();
+    this.resetFormsService.resetAsked();
+  }
+
+  resetForm() {
+    this.tipAmount = 0;
+    this.totalPerPerson = 0;
   }
 
 }

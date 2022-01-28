@@ -2,17 +2,17 @@
   <div>
     <div class="error-container">
       <label for="billInput">Bill</label>
-      <div class="error-wrapper"></div>
+      <div class="error-wrapper" >{{ billError }}</div>
     </div>
-    <input class="inputField" id="billInput" type="text" formControlName="billInput" placeholder="0">
+    <input class="inputField" [ngClass]="{'error': billError !== '' }" id="billInput" type="number" formControlName="billInput" placeholder="0">
   </div>
 
   <div class="buttons-section">
     <div class="error-container">
       <label>Select Tip %</label>
-      <div class="error-wrapper"></div>
+      <div class="error-wrapper">{{ tipError }}</div>
     </div>
-    <div class="buttons-wrapper">
+    <div class="buttons-wrapper" [ngClass]="{'error': tipError !== '' }">
       <button class="button tip-btn" (click)="onClick($event)" value="5">5%</button>
       <button class="button tip-btn" (click)="onClick($event)" value="10">10%</button>
       <button class="button tip-btn" (click)="onClick($event)" value="15">15%</button>
@@ -25,8 +25,8 @@
   <div>
     <div class="error-container">
       <label for="people">Number of People</label>
-      <div class="error-wrapper">Can't be zero</div>
+      <div class="error-wrapper">{{ peopleError }}</div>
     </div>
-    <input class="inputField" id="people" type="text" formControlName="people" placeholder="0">
+    <input class="inputField" [ngClass]="{'error': peopleError !== '' }" id="people" type="number" formControlName="people" placeholder="0">
   </div>
 </form>

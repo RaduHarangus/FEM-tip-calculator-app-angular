@@ -1,7 +1,8 @@
-import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
-import { FormBuilder } from "@angular/forms";
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {FormBuilder, FormGroup, FormControl} from "@angular/forms";
 import { InputDataService } from '../../services/input-data.service';
 import { ResetFormsService } from "../../services/reset-forms.service";
+import * as $ from "jquery";
 
 @Component({
   selector: 'app-input',
@@ -11,10 +12,16 @@ import { ResetFormsService } from "../../services/reset-forms.service";
 export class InputComponent implements OnInit {
   @Output() tipAmountEvent = new EventEmitter<number>();
 
+  // inputForm = new FormGroup({
+  //   billInput: new FormControl('0'),
+  //   people: new FormControl('0'),
+  //   radio: new FormControl('5')
+  // });
+
   inputForm = this.formBuilder.group({
     billInput: 0,
     people: 0,
-    tipInput: 0
+    radio: 0
   });
 
   billError = '';
@@ -29,11 +36,12 @@ export class InputComponent implements OnInit {
     this.resetFormsService.resetAskedEvent.subscribe( _ => this.resetForm() );
   }
 
-  onClick(event: any): void {
-    let newInput = {
-      tipInput: Number(event.target.value)
-    };
-    this.inputForm.patchValue(newInput);
+  onFocus(): void {
+    let tmp = $('.tip-radio');
+    tmp.each(function( index, value ) {
+      $(this).prop('checked', false);
+    });
+
   }
 
   onKeyDown(event: any): void {
@@ -42,16 +50,35 @@ export class InputComponent implements OnInit {
       event.preventDefault();
       return;
     }
-    let newInput = {
-      tipInput: Number(value)
-    };
-    this.inputForm.patchValue(newInput);
+    this.inputForm.patchValue({radio: Number(value)});
+  }
+
+  forceFormSubmit(event: any): void {
+    // console.log("selected 1: ", this.inputForm.get('radio')?.value);
+    console.log("selected: ", event.target.value);
+    this.inputForm.patchValue({radio: Number(event.target.value)});
+    this.onFormSubmit(event.target.value);
+  }
+
+  onFormSubmit(tipSelection = 0): void {
+    // let tipSelection = this.inputForm.get('radio')?.value;
+    // console.log("radio selected: ", tipSelection);
+    this.inputForm.patchValue({radio: Number(tipSelection)});
+
+    if (!this.validateInput()) {
+      return;
+    }
+    this.clearErrors();
+    this.tipAmountEvent.emit(this.inputForm.value['billInput']);
+    this.inputDataService.changeOutput(this.inputForm.value);
   }
 
   validateInput(): boolean {
     let bill = this.inputForm.value['billInput'];
-    let tip = this.inputForm.value['tipInput'];
+    let tip = this.inputForm.value['radio'];
     let people = this.inputForm.value['people'];
+
+    // console.log("validate tip: ", tip);
 
     if ( bill === null || bill === '' || typeof(bill) !== "number" || bill <= 0 ) {
       this.displayError('bill');
@@ -73,7 +100,7 @@ export class InputComponent implements OnInit {
     // console.log("there is an error at ", inputField, ' ', this.inputForm.value[inputField], ' ', typeof(this.inputForm.value[inputField]));
     let errorMessage = 'error';
     let bill = this.inputForm.value['billInput'];
-    let tip = this.inputForm.value['tipInput'];
+    let tip = this.inputForm.value['radio'];
     let people = this.inputForm.value['people'];
 
     if (bill == null || tip == null || people == null || bill === '' || tip === '' || people === '' || typeof(bill) === 'undefined' || typeof(tip) === 'undefined' || typeof(people) === 'undefined' ) {
@@ -105,23 +132,19 @@ export class InputComponent implements OnInit {
     }
   }
 
-  clearErrors() {
+  clearErrors(): void {
     this.billError = '';
     this.peopleError = '';
     this.tipError = '';
   }
 
-  onSubmit(): void {
-    if (!this.validateInput()) {
-      return;
-    }
-    this.clearErrors();
-    this.tipAmountEvent.emit(this.inputForm.value['billInput']);
-    this.inputDataService.changeOutput(this.inputForm.value);
+  clearCustomTip(): void {
+    $('.custom-btn').val('');
   }
 
   resetForm(): void {
     this.inputForm.reset();
     this.clearErrors();
+    this.clearCustomTip();
   }
 }

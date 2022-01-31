@@ -1,4 +1,4 @@
-<form [formGroup]="inputForm" (ngSubmit)="onSubmit()" class="input-form">
+<form [formGroup]="inputForm" (ngSubmit)="onFormSubmit()" class="input-form">
   <div>
     <div class="error-container">
       <label for="billInput">Bill</label>
@@ -13,12 +13,27 @@
       <div class="error-wrapper">{{ tipError }}</div>
     </div>
     <div class="buttons-wrapper" [ngClass]="{'error': tipError !== '' }">
-      <button class="button tip-btn" (click)="onClick($event)" value="5">5%</button>
-      <button class="button tip-btn" (click)="onClick($event)" value="10">10%</button>
-      <button class="button tip-btn" (click)="onClick($event)" value="15">15%</button>
-      <button class="button tip-btn" (click)="onClick($event)" value="25">25%</button>
-      <button class="button tip-btn" (click)="onClick($event)" value="50">50%</button>
-      <input class="tip-btn custom-btn inputField" type="text" (keydown)="onKeyDown($event)" placeholder="Custom">
+      <label class="radio-container">
+        <input class="tip-radio" type="radio" formControlName="radio" (click)="forceFormSubmit($event)" value="5">
+        <span class="checkmark tip-btn">5%</span>
+      </label>
+      <label class="radio-container">
+        <input class="tip-radio" type="radio" formControlName="radio" (click)="forceFormSubmit($event)" value="10">
+        <span class="checkmark tip-btn">10%</span>
+      </label>
+      <label class="radio-container">
+        <input class="tip-radio" type="radio" formControlName="radio" (click)="forceFormSubmit($event)" value="15">
+        <span class="checkmark tip-btn">15%</span>
+      </label>
+      <label class="radio-container">
+        <input class="tip-radio" type="radio" formControlName="radio" (click)="forceFormSubmit($event)" value="25">
+        <span class="checkmark tip-btn">25%</span>
+      </label>
+      <label class="radio-container">
+        <input class="tip-radio" type="radio" formControlName="radio" (click)="forceFormSubmit($event)" value="50">
+        <span class="checkmark tip-btn">50%</span>
+      </label>
+      <input class="tip-btn custom-btn inputField" type="text" (keydown)="onKeyDown($event)" (focus)="onFocus()" placeholder="Custom">
     </div>
   </div>
 
@@ -29,4 +44,9 @@
     </div>
     <input class="inputField" [ngClass]="{'error': peopleError !== '' }" id="people" type="number" formControlName="people" placeholder="0">
   </div>
+
+  <button type="submit" hidden></button>
+
 </form>
+
+<p>{{inputForm.value | json}}</p>

@@ -13,7 +13,7 @@ export class OutputComponent implements OnInit {
   inputData = this.formBuilder.group({
     billInput: 0,
     people: 0,
-    tipInput: 0
+    radio: 0
   });
 
   tipAmount = 0;
@@ -28,8 +28,11 @@ export class OutputComponent implements OnInit {
     this.getInputData();
     this.subscription = this.inputDataService.currentInputData.subscribe(data => {
       this.inputData = data;
-      let tip = data['billInput'] * data['tipInput'] / 100;
-      this.tipAmount = (tip / data['people']);
+      let tip = data['billInput'] * data['radio'] / 100;
+
+      // console.log("output subscription, tipAmount: ", data['billInput'], data['radio']);
+
+      this.tipAmount = Number(tip / data['people']);
       let total = Number(data['billInput']) + Number(tip);
       this.totalPerPerson = total / data['people'];
     });

@@ -12,12 +12,6 @@ import * as $ from "jquery";
 export class InputComponent implements OnInit {
   @Output() tipAmountEvent = new EventEmitter<number>();
 
-  // inputForm = new FormGroup({
-  //   billInput: new FormControl('0'),
-  //   people: new FormControl('0'),
-  //   radio: new FormControl('5')
-  // });
-
   inputForm = this.formBuilder.group({
     billInput: 0,
     people: 0,
@@ -40,6 +34,7 @@ export class InputComponent implements OnInit {
     let tmp = $('.tip-radio');
     tmp.each(function( index, value ) {
       $(this).prop('checked', false);
+      $(this).siblings().removeClass('checked');
     });
 
   }
@@ -54,15 +49,19 @@ export class InputComponent implements OnInit {
   }
 
   forceFormSubmit(event: any): void {
-    // console.log("selected 1: ", this.inputForm.get('radio')?.value);
-    console.log("selected: ", event.target.value);
+    let tmp = $('.tip-radio');
+    tmp.each(function() {
+      if ($(this).prop('checked')) {
+        $(this).siblings().addClass('checked');
+      } else {
+        $(this).siblings().removeClass('checked');
+      }
+    });
     this.inputForm.patchValue({radio: Number(event.target.value)});
     this.onFormSubmit(event.target.value);
   }
 
   onFormSubmit(tipSelection = 0): void {
-    // let tipSelection = this.inputForm.get('radio')?.value;
-    // console.log("radio selected: ", tipSelection);
     this.inputForm.patchValue({radio: Number(tipSelection)});
 
     if (!this.validateInput()) {
@@ -77,8 +76,6 @@ export class InputComponent implements OnInit {
     let bill = this.inputForm.value['billInput'];
     let tip = this.inputForm.value['radio'];
     let people = this.inputForm.value['people'];
-
-    // console.log("validate tip: ", tip);
 
     if ( bill === null || bill === '' || typeof(bill) !== "number" || bill <= 0 ) {
       this.displayError('bill');
@@ -97,7 +94,6 @@ export class InputComponent implements OnInit {
   }
 
   displayError(inputField: string): void {
-    // console.log("there is an error at ", inputField, ' ', this.inputForm.value[inputField], ' ', typeof(this.inputForm.value[inputField]));
     let errorMessage = 'error';
     let bill = this.inputForm.value['billInput'];
     let tip = this.inputForm.value['radio'];

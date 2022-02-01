@@ -1,0 +1,50 @@
+<form [formGroup]="inputForm" (ngSubmit)="onFormSubmit()" class="input-form">
+  <div>
+    <div class="error-container">
+      <label for="billInput">Bill</label>
+      <div class="error-wrapper" >{{ billError }}</div>
+    </div>
+    <input class="inputField" [ngClass]="{'error': billError !== '' }" id="billInput" type="number" formControlName="billInput" placeholder="0">
+  </div>
+
+  <div class="buttons-section">
+    <div class="error-container">
+      <label>Select Tip %</label>
+      <div class="error-wrapper">{{ tipError }}</div>
+    </div>
+    <div class="buttons-wrapper" [ngClass]="{'error': tipError !== '' }">
+      <label class="radio-container">
+        <input class="tip-radio" type="radio" formControlName="radio" (click)="forceFormSubmit($event)" value="5">
+        <span class="checkmark tip-btn">5%</span>
+      </label>
+      <label class="radio-container">
+        <input class="tip-radio" type="radio" formControlName="radio" (click)="forceFormSubmit($event)" value="10">
+        <span class="checkmark tip-btn">10%</span>
+      </label>
+      <label class="radio-container">
+        <input class="tip-radio" type="radio" formControlName="radio" (click)="forceFormSubmit($event)" value="15">
+        <span class="checkmark tip-btn">15%</span>
+      </label>
+      <label class="radio-container">
+        <input class="tip-radio" type="radio" formControlName="radio" (click)="forceFormSubmit($event)" value="25">
+        <span class="checkmark tip-btn">25%</span>
+      </label>
+      <label class="radio-container">
+        <input class="tip-radio" type="radio" formControlName="radio" (click)="forceFormSubmit($event)" value="50">
+        <span class="checkmark tip-btn">50%</span>
+      </label>
+      <input class="tip-btn custom-btn inputField" formControlName="radio" type="number" (keydown)="onKeyDown($event)" (focus)="onFocus()" placeholder="Custom">
+    </div>
+  </div>
+
+  <div>
+    <div class="error-container">
+      <label for="people">Number of People</label>
+      <div class="error-wrapper">{{ peopleError }}</div>
+    </div>
+    <input class="inputField" [ngClass]="{'error': peopleError !== '' }" id="people" type="number" formControlName="people" placeholder="0">
+  </div>
+
+  <button type="submit" hidden></button>
+
+</form>

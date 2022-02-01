@@ -1,0 +1,19 @@
+@import '../less/variables';
+
+.logo-container {
+  width: fit-content;
+  margin: 50px auto 40px;
+  @media screen and (min-width: @SecondBreak) {
+    margin: 160px auto 85px;
+  }
+}
+
+.main-app {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 35px;
+  @media screen and (min-width: @SecondBreak) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+

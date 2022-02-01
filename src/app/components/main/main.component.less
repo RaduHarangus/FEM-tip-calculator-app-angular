@@ -1,0 +1,26 @@
+@import '../../../less/variables';
+
+app-input,
+app-output {
+  width: 100%;
+
+}
+
+app-input {
+  padding: 9.5px;
+  @media screen and (min-width: @SecondBreak) {
+    padding: 13px;
+  }
+}
+
+app-output {
+  position: relative;
+  background-color: @display-bg;
+  border-radius: @Border-radius2;
+  padding: 22.5px;
+  min-height: 300px;
+  @media screen and (min-width: @SecondBreak) {
+    padding: 40px;
+    min-height: unset;
+  }
+}

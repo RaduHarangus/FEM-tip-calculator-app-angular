@@ -41,10 +41,6 @@ export class InputComponent implements OnInit {
 
   onKeyDown(event: any): void {
     const value = event.target.value;
-    if ( ((event.keyCode < 48 || event.keyCode > 105 ) || (event.keyCode > 57 && event.keyCode < 96)) && (value == null || value === '') ) {
-      event.preventDefault();
-      return;
-    }
     this.inputForm.patchValue({radio: Number(value)});
   }
 
@@ -58,12 +54,10 @@ export class InputComponent implements OnInit {
       }
     });
     this.inputForm.patchValue({radio: Number(event.target.value)});
-    this.onFormSubmit(event.target.value);
+    this.onFormSubmit();
   }
 
-  onFormSubmit(tipSelection = 0): void {
-    this.inputForm.patchValue({radio: Number(tipSelection)});
-
+  onFormSubmit(): void {
     if (!this.validateInput()) {
       return;
     }
@@ -89,7 +83,6 @@ export class InputComponent implements OnInit {
       this.displayError('tip');
       return false;
     }
-
     return true;
   }
 

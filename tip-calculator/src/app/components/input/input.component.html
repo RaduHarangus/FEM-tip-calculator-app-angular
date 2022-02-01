@@ -33,7 +33,7 @@
         <input class="tip-radio" type="radio" formControlName="radio" (click)="forceFormSubmit($event)" value="50">
         <span class="checkmark tip-btn">50%</span>
       </label>
-      <input class="tip-btn custom-btn inputField" type="text" (keydown)="onKeyDown($event)" (focus)="onFocus()" placeholder="Custom">
+      <input class="tip-btn custom-btn inputField" formControlName="radio" type="number" (keydown)="onKeyDown($event)" (focus)="onFocus()" placeholder="Custom">
     </div>
   </div>
 
@@ -48,5 +48,3 @@
   <button type="submit" hidden></button>
 
 </form>
-
-<p>{{inputForm.value | json}}</p>

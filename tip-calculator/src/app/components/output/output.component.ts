@@ -29,9 +29,6 @@ export class OutputComponent implements OnInit {
     this.subscription = this.inputDataService.currentInputData.subscribe(data => {
       this.inputData = data;
       let tip = data['billInput'] * data['radio'] / 100;
-
-      // console.log("output subscription, tipAmount: ", data['billInput'], data['radio']);
-
       this.tipAmount = Number(tip / data['people']);
       let total = Number(data['billInput']) + Number(tip);
       this.totalPerPerson = total / data['people'];
